@@ -5,7 +5,6 @@ import (
 	"errors"
 	"github.com/twpayne/go-geom"
 	"github.com/twpayne/go-geom/encoding/geojson"
-	"github.com/twpayne/go-geom/encoding/wkb"
 	"google.golang.org/protobuf/types/known/structpb"
 )
 
@@ -49,7 +48,7 @@ func NewAddressEntityFromPb(s *Address) (*AddressEntity, error) {
 		if !ok {
 			return nil, ErrGeoNotPoint
 		}
-		ret.Geo = (*Point)(&wkb.Point{Point: point})
+		ret.Geo = NewPoint(point)
 	}
 	return ret, nil
 }
