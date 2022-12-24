@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package data;
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/go-saas/lbs;lbs";
+
+message Address{
+  //Country or region
+  string country=1;
+  //State or province
+  string state=2;
+  string city=3;
+  string zip_code=4;
+  string line1=5;
+  string line2=6;
+  string line3=7;
+  //Geo geojson
+  google.protobuf.Struct geo=100;
+}
