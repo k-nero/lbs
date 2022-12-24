@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package data;
+package lbs;
 import "google/protobuf/struct.proto";
 
 option go_package = "github.com/go-saas/lbs;lbs";
