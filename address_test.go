@@ -59,7 +59,7 @@ func TestAddress(t *testing.T) {
 		Geo:     NewPoint(geom.NewPoint(2)),
 	}
 	pbAddr, err := addr.ToPb()
-
+	assert.NoError(t, err)
 	addr, err = NewAddressEntityFromPb(pbAddr)
 	assert.NoError(t, err)
 
