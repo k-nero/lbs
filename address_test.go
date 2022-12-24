@@ -78,7 +78,7 @@ func TestAddress(t *testing.T) {
 	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().X(), 0.1275)
 	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().Y(), 51.50722)
 
-	err = db.Create(&testAddress{ID: 1, Address: &AddressEntity{
+	err = db.Create(&testAddress{ID: 2, Address: &AddressEntity{
 		Country: "Country",
 		State:   "State",
 		City:    "City",
