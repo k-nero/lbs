@@ -64,7 +64,7 @@ func (s *AddressEntity) ToPb() (*Address, error) {
 		Line3:   s.Line3,
 	}
 	if s.Geo != nil {
-		b, err := geojson.Marshal(s.Geo.Point)
+		b, err := geojson.Marshal(s.Geo.Point.Point)
 		if err != nil {
 			return nil, err
 		}
