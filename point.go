@@ -12,7 +12,7 @@ import (
 //
 // https://stackoverflow.com/a/60577841
 type Point struct {
-	*wkb.Point
+	Point *wkb.Point
 }
 
 // GormDataType ...
