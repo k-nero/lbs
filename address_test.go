@@ -66,6 +66,7 @@ func TestAddress(t *testing.T) {
 
 	err = db.Create(&testAddress{ID: 1, Address: addr}).Error
 	assert.NoError(t, err)
+
 	var dbAddr testAddress
 	err = db.Model(&testAddress{}).First(&dbAddr, "id = ?", 1).Error
 	assert.NoError(t, err)
@@ -76,4 +77,20 @@ func TestAddress(t *testing.T) {
 	assert.Equal(t, dbAddr.Address.Geo.Point.Point.SRID(), 4326)
 	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().X(), 0.1275)
 	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().Y(), 51.50722)
+
+	err = db.Create(&testAddress{ID: 1, Address: &AddressEntity{
+		Country: "Country",
+		State:   "State",
+		City:    "City",
+		ZipCode: "ZipCode",
+		Line1:   "Line1",
+		Line2:   "Line2",
+		Line3:   "Line3",
+		Geo:     nil, // empty geo
+	}}).Error
+	assert.NoError(t, err)
+	err = db.Model(&testAddress{}).First(&dbAddr, "id = ?", 2).Error
+	assert.NoError(t, err)
+	assert.Equal(t, 2, dbAddr.ID)
+	assert.Nil(t, dbAddr.Address.Geo)
 }
