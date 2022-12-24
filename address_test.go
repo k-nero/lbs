@@ -27,8 +27,9 @@ func TestAddress(t *testing.T) {
 	pool.MaxWait = time.Minute * 2
 	require.NoError(t, err)
 
-	resource, err := pool.Run("mysql", "5.7", []string{
+	resource, err := pool.Run("mysql", "8.0", []string{
 		"MYSQL_ROOT_PASSWORD=" + password,
+		"MYSQL_ROOT_HOST=%",
 	})
 	require.NoError(t, err)
 	defer func() {
