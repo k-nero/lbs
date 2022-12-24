@@ -25,6 +25,12 @@ func NewPoint(p *geom.Point) *Point {
 }
 
 func (p *Point) Value() (driver.Value, error) {
+	if p == nil {
+		return nil, nil
+	}
+	if p.Point.Point == nil {
+		return nil, nil
+	}
 	value, err := p.Point.Value()
 	if err != nil {
 		return nil, err

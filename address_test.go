@@ -27,7 +27,7 @@ func TestAddress(t *testing.T) {
 	pool.MaxWait = time.Minute * 2
 	require.NoError(t, err)
 
-	resource, err := pool.Run("mysql", "8.0", []string{
+	resource, err := pool.Run("mysql", "5.7", []string{
 		"MYSQL_ROOT_PASSWORD=" + password,
 		"MYSQL_ROOT_HOST=%",
 	})
@@ -78,20 +78,20 @@ func TestAddress(t *testing.T) {
 	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().X(), 0.1275)
 	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().Y(), 51.50722)
 
-	//err = db.Create(&testAddress{ID: 2, Address: &AddressEntity{
-	//	Country: "Country",
-	//	State:   "State",
-	//	City:    "City",
-	//	ZipCode: "ZipCode",
-	//	Line1:   "Line1",
-	//	Line2:   "Line2",
-	//	Line3:   "Line3",
-	//	Geo:     nil, // empty geo
-	//}}).Error
-	//assert.NoError(t, err)
-	//var dbAddr2 testAddress
-	//err = db.Model(&testAddress{}).First(&dbAddr2, "id = ?", 2).Error
-	//assert.NoError(t, err)
-	//assert.Equal(t, 2, dbAddr2.ID)
-	//assert.Nil(t, dbAddr2.Address.Geo)
+	err = db.Create(&testAddress{ID: 2, Address: &AddressEntity{
+		Country: "Country",
+		State:   "State",
+		City:    "City",
+		ZipCode: "ZipCode",
+		Line1:   "Line1",
+		Line2:   "Line2",
+		Line3:   "Line3",
+		Geo:     nil, // empty geo
+	}}).Error
+	assert.NoError(t, err)
+	var dbAddr2 testAddress
+	err = db.Model(&testAddress{}).First(&dbAddr2, "id = ?", 2).Error
+	assert.NoError(t, err)
+	assert.Equal(t, 2, dbAddr2.ID)
+	assert.Nil(t, dbAddr2.Address.Geo)
 }
