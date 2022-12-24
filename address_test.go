@@ -89,8 +89,9 @@ func TestAddress(t *testing.T) {
 		Geo:     nil, // empty geo
 	}}).Error
 	assert.NoError(t, err)
-	err = db.Model(&testAddress{}).First(&dbAddr, "id = ?", 2).Error
+	var dbAddr2 testAddress
+	err = db.Model(&testAddress{}).First(&dbAddr2, "id = ?", 2).Error
 	assert.NoError(t, err)
-	assert.Equal(t, 2, dbAddr.ID)
-	assert.Nil(t, dbAddr.Address.Geo)
+	assert.Equal(t, 2, dbAddr2.ID)
+	assert.Nil(t, dbAddr2.Address.Geo)
 }
