@@ -6,12 +6,15 @@ import (
 )
 
 // Point wrap wkb.Point
-type Point wkb.Point
+type Point struct {
+	*wkb.Point
+}
 
 // GormDataType ...
-func (g Point) GormDataType() string {
+func (p *Point) GormDataType() string {
 	return "geometry"
 }
+
 func NewPoint(p *geom.Point) *Point {
-	return (*Point)(&wkb.Point{Point: p})
+	return &Point{&wkb.Point{Point: p}}
 }
