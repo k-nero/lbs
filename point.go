@@ -12,7 +12,7 @@ import (
 //
 // https://stackoverflow.com/a/60577841
 type Point struct {
-	Point *wkb.Point
+	Point wkb.Point
 }
 
 // GormDataType ...
@@ -21,7 +21,7 @@ func (p *Point) GormDataType() string {
 }
 
 func NewPoint(p *geom.Point) *Point {
-	return &Point{&wkb.Point{Point: p}}
+	return &Point{wkb.Point{Point: p}}
 }
 
 func (p *Point) Value() (driver.Value, error) {
