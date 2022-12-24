@@ -57,7 +57,7 @@ func TestAddress(t *testing.T) {
 		Line1:   "Line1",
 		Line2:   "Line2",
 		Line3:   "Line3",
-		Geo:     NewPoint(geom.NewPoint(2)),
+		Geo:     NewPoint(geom.NewPoint(geom.XY).MustSetCoords([]float64{0.1275, 51.50722}).SetSRID(4326)),
 	}
 	pbAddr, err := addr.ToPb()
 	assert.NoError(t, err)
@@ -73,4 +73,7 @@ func TestAddress(t *testing.T) {
 	assert.NotNil(t, dbAddr.Address)
 	assert.NotNil(t, dbAddr.Address.Geo)
 	assert.Equal(t, "Country", dbAddr.Address.Country)
+	assert.Equal(t, dbAddr.Address.Geo.Point.Point.SRID(), 4326)
+	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().X(), 0.1275)
+	assert.Equal(t, dbAddr.Address.Geo.Point.Point.Coords().Y(), 51.50722)
 }
