@@ -13,8 +13,8 @@ var (
 )
 
 type AddressEntity struct {
-	//Country or region
 	Country string
+	Region  string
 	//State or province
 	State   string
 	City    string
@@ -28,6 +28,7 @@ type AddressEntity struct {
 func NewAddressEntityFromPb(s *Address) (*AddressEntity, error) {
 	ret := &AddressEntity{
 		Country: s.Country,
+		Region:  s.Region,
 		State:   s.State,
 		City:    s.City,
 		ZipCode: s.ZipCode,
@@ -56,6 +57,7 @@ func NewAddressEntityFromPb(s *Address) (*AddressEntity, error) {
 func (s *AddressEntity) ToPb() (*Address, error) {
 	ret := &Address{
 		Country: s.Country,
+		Region:  s.Region,
 		State:   s.State,
 		City:    s.City,
 		ZipCode: s.ZipCode,
